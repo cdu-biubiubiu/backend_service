@@ -15,4 +15,4 @@ class Link {
 
 const LinkModel = getModelForClass(Link);
 
-export { LinkModel };
+export { LinkModel, Link };
