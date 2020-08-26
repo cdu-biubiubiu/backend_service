@@ -1,7 +1,7 @@
 import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
-import { LinkModel, Link, JoiLinkArray, JoiLinkId } from '../Models/link.model';
+import { LinkModel, Link, JoiLinkArray, JoiLinkId } from '../models/link.model';
 
 const linkRoutes: ServerRoute[] = [
   {

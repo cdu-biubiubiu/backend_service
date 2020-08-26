@@ -1,7 +1,7 @@
 import { mongoose } from '@typegoose/typegoose';
 import Joi, { link } from 'joi';
 import { ServerRoute } from '@hapi/hapi';
-import { PostModel, Post, JoiPostId, JoiPostCreate, JoiPostModify } from '../Models/post.model';
+import { PostModel, Post, JoiPostId, JoiPostCreate, JoiPostModify } from '../models/post.model';
 
 const postRoutes: ServerRoute[] = [
   {

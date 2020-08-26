@@ -2,7 +2,7 @@ import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
 
-import { UserModel, User, JoiUserArray, JoiUserId, JoiUser } from '../Models/user.model';
+import { UserModel, User, JoiUserArray, JoiUserId, JoiUser } from '../models/user.model';
 
 const userRoutes: ServerRoute[] = [
   {
