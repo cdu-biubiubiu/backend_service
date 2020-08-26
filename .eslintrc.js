@@ -13,7 +13,8 @@ module.exports = {
   plugins: ['prettier', '@typescript-eslint', 'import'],
   rules: {
     'prettier/prettier': ['error'],
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     'no-console': 'off',
     'func-names': 'off',
     'no-process-exit': 'off',
