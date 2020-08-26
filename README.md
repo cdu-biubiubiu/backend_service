@@ -10,10 +10,16 @@
 
 如果使用 nvm 安装的 Node.js，使用`npm i -g yarn`安装`yarn`
 
-### yarn 换源
+### 换源
 
 ```sh
+# yarn
 yarn config set registry https://registry.npm.taobao.org/
+
+# npm
+# 在本地用户目录下新建一个`.npmrc`文件，里面添加
+registry=https://mirrors.sjtug.sjtu.edu.cn/npm-registry
+
 ```
 
 ### 安装`Mongodb`
