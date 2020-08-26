@@ -10,7 +10,9 @@ const init = async () => {
   server.route({
     method: 'GET',
     path: '/',
-    handler: (req, h) => 'Hello hapi.js',
+    handler: (req, h) => ({
+      msg: 'Hello hapi.js!',
+    }),
   });
   await server.start();
   console.log('Server is running on %s', server.info.uri);
