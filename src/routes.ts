@@ -1,5 +1,6 @@
 import { ServerRoute } from '@hapi/hapi';
 import Joi from 'joi';
+import { LinkModel } from './Models/link.model';
 
 const endpoints: ServerRoute[] = [
   {
@@ -15,6 +16,21 @@ const endpoints: ServerRoute[] = [
           name: Joi.string().required().description('Your name'),
         }),
       },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/link',
+    options: {
+      handler: async () => {
+        const links = await LinkModel.find({}).exec();
+        return {
+          title: 'links',
+          links,
+        };
+      },
+      description: '获得所有友情链接',
+      tags: ['api'],
     },
   },
 ];

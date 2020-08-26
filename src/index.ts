@@ -2,6 +2,7 @@ import Hapi from '@hapi/hapi';
 import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
 import * as HapiSwagger from 'hapi-swagger';
+import * as mongooseService from './mongoose.service';
 
 import endpoints from './routes';
 
@@ -31,7 +32,8 @@ const init = async () => {
   await server.register(plugins);
 
   server.route(endpoints);
-
+  // TODO Promise并行化
+  await mongooseService.init();
   await server.start();
   console.log('🤩 Server is running on %s.', server.info.uri);
 };
