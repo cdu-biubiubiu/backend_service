@@ -1,0 +1,11 @@
+{
+  "name": "backend-service",
+  "version": "0.0.1",
+  "description": "为web提供API服务",
+  "main": "index.js",
+  "author": "Han Han",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/hapi": "^20.0.0"
+  }
+}
