@@ -1,7 +1,8 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
+import Joi from 'joi';
 
 type Competence = 'superAdministrator' | 'administrator' | 'articlePublisher';
-class User {
+export class User {
   @prop({ type: String })
   public username: string;
 
@@ -18,6 +19,15 @@ class User {
   }
 }
 
-const UserModel = getModelForClass(User);
+export const UserModel = getModelForClass(User);
 
-export { UserModel };
+export const JoiUserId = Joi.required().description('用户_id');
+export const JoiUser = Joi.object({
+  username: Joi.string().required().description('用户名'),
+  password: Joi.string().required().description('密码'),
+  // TODO: 设置选项
+  competence: Joi.string().required().description('权限设置'),
+});
+export const JoiUserArray = Joi.array().items(JoiUser);
+
+// export { UserModel };

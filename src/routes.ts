@@ -1,94 +1,14 @@
-import { ServerRoute } from '@hapi/hapi';
+import { ServerRoute, ServerRegisterPluginObjectArray } from '@hapi/hapi';
 import Joi from 'joi';
 import { LinkModel, Link } from './Models/link.model';
 import { mongoose } from '@typegoose/typegoose';
+import { PostModel } from './Models/post.model';
+import helloRoutes from './routes/hello.routes';
+import linkRoutes from './routes/link.routes';
+import postRoutes from './routes/post.routes';
+import userRoutes from './routes/user.routes';
 
-const helloRoute: ServerRoute[] = [
-  {
-    method: ['GET'],
-    path: '/hello/{name}/',
-    options: {
-      handler: (req) => `Hello, ${req.params.name}`,
-      description: 'Say hello',
-      notes: "Return 'Hello name' by the name passed in the path",
-      tags: ['api'],
-      validate: {
-        params: Joi.object({
-          name: Joi.string().required().description('Your name'),
-        }),
-      },
-    },
-  },
-];
-const linkRoute: ServerRoute[] = [
-  {
-    method: 'GET',
-    path: '/link',
-    options: {
-      handler: async () => {
-        try {
-          const links = await LinkModel.find({}).exec();
-          return links;
-        } catch (e) {
-          return console.error(e);
-        }
-      },
-      description: '获得所有友情链接',
-      tags: ['api'],
-    },
-  },
-  {
-    method: 'POST',
-    path: '/link',
-    handler: async (req, h) => {
-      console.log(`req.payload: ${req.payload}`);
-      try {
-        const result = await LinkModel.insertMany(req.payload as Link);
-        return result;
-      } catch (e) {
-        return console.error(e);
-      }
-    },
-    options: {
-      description: '新增友情链接(一个或者多个)',
-      tags: ['api', 'link'],
-      validate: {
-        payload: Joi.array().items(
-          Joi.object({
-            name: Joi.string().default('google').required().description('链接名'),
-            src: Joi.string().default('www.google.com').required().description('链接'),
-          })
-        ),
-      },
-    },
-  },
-  {
-    method: 'DELETE',
-    path: '/link/{id}',
-    handler: async (req, h) => {
-      console.log(`req.params.id: ${req.params.id}`);
-      try {
-        const _id = mongoose.Types.ObjectId(req.params.id);
-        const result = await LinkModel.deleteOne({ _id }).exec();
-        return result;
-      } catch (e) {
-        return console.error(e);
-      }
-    },
-    options: {
-      description: '通过id删除一个链接',
-      tags: ['api', 'link'],
-      validate: {
-        params: Joi.object({
-          id: Joi.required().description('友情链接id'),
-        }),
-      },
-    },
-  },
-];
-const postRoute: ServerRoute[] = [];
-
-const userRoute: ServerRoute[] = [];
-const endpoints: ServerRoute[] = [...helloRoute, ...linkRoute, ...postRoute, ...userRoute];
+// TODO: use custom method to add route
+const endpoints: ServerRoute[] = [...helloRoutes, ...linkRoutes, ...postRoutes, ...userRoutes];
 
 export default endpoints;
