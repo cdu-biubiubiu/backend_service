@@ -1,12 +1,34 @@
 import Hapi from '@hapi/hapi';
+import Inert from '@hapi/inert';
+import Vision from '@hapi/vision';
+import * as HapiSwagger from 'hapi-swagger';
+
 import endpoints from './routes';
 
 const init = async () => {
-  const profile = {
-    host: 'localhost',
-    port: 3000,
+  const host = 'localhost';
+  const port = 3000;
+  const server = Hapi.server({ host, port });
+
+  const swaggerOptions = {
+    info: {
+      title: 'Test API Documentation',
+      version: '0.0.1',
+    },
   };
-  const server = Hapi.server(profile);
+  const plugins: Hapi.ServerRegisterPluginObject<any>[] = [
+    {
+      plugin: Inert,
+    },
+    {
+      plugin: Vision,
+    },
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ];
+  await server.register(plugins);
 
   server.route(endpoints);
 
