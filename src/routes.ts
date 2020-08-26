@@ -1,6 +1,7 @@
 import { ServerRoute } from '@hapi/hapi';
 import Joi from 'joi';
 import { LinkModel, Link } from './Models/link.model';
+import { mongoose } from '@typegoose/typegoose';
 
 const helloRoute: ServerRoute[] = [
   {
@@ -54,8 +55,8 @@ const linkRoute: ServerRoute[] = [
       validate: {
         payload: Joi.array().items(
           Joi.object({
-            name: Joi.string().required().description('链接名'),
-            src: Joi.string().required().description('链接'),
+            name: Joi.string().default('google').required().description('链接名'),
+            src: Joi.string().default('www.google.com').required().description('链接'),
           })
         ),
       },
@@ -67,7 +68,8 @@ const linkRoute: ServerRoute[] = [
     handler: async (req, h) => {
       console.log(`req.params.id: ${req.params.id}`);
       try {
-        const result = await LinkModel.deleteOne(req.params.id).exec();
+        const _id = mongoose.Types.ObjectId(req.params.id);
+        const result = await LinkModel.deleteOne({ _id }).exec();
         return result;
       } catch (e) {
         return console.error(e);
