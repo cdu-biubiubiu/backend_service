@@ -1,4 +1,5 @@
 import Hapi from '@hapi/hapi';
+import endpoints from './routes';
 
 const init = async () => {
   const profile = {
@@ -7,15 +8,10 @@ const init = async () => {
   };
   const server = Hapi.server(profile);
 
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: (req, h) => ({
-      msg: 'Hello hapi.js!',
-    }),
-  });
+  server.route(endpoints);
+
   await server.start();
-  console.log('Server is running on %s', server.info.uri);
+  console.log('🤩 Server is running on %s.', server.info.uri);
 };
 
 init().catch((err) => {
