@@ -4,7 +4,8 @@ import Vision from '@hapi/vision';
 import * as HapiSwagger from 'hapi-swagger';
 import * as mongooseService from './mongoose.service';
 
-import endpoints from './routes';
+// import endpoints from './routes';
+import endpoints from './routes/index';
 
 const init = async () => {
   const host = 'localhost';
