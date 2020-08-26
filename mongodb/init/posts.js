@@ -1,7 +1,7 @@
-db.articles.deleteMany({});
+db.posts.deleteMany({});
 
 for (let i = 0; i < 1000; i += 1) {
-  db.articles.insertOne({
+  db.posts.insertOne({
     title: `test article #${i}`,
     creationDate: new Date(),
     modifiedDate: new Date(),
