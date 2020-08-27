@@ -24,9 +24,7 @@ Swagger 页面 -- http://localhost:3000/documentation
 
 ## 如何使用
 
-这是一个提供 API 的服务器，`/documentation` 为 swagger 文档地址
-
-，`/api` 为各种 api 的地址//todo
+这是一个提供 API 的服务器，`/documentation` 为 swagger 文档地址, 具体的 api 地址可以在文档页查看
 
 ## Get Start
 
