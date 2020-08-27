@@ -30,9 +30,27 @@ Swagger 页面 -- http://localhost:3000/documentation
 
 ### Run With Docker
 
-最简单的方式是直接通过 Docker 运行
+1. 最简单的方法
 
-首先运行之前你需要安装 docker，docker-compose，然后运行 `docker-compose up -d` 即可
+   安装 docker，docker-compose，然后运行 `docker-compose up -d` 即可
+
+2. 手动构建 docker 镜像
+
+   mangodb 的 docker 版运行命令在 `./mongodb/start.sh` 里面，hapi 服务的构建命令在 `Dockerfile` 内。
+
+   linux 示例
+
+   ```sh
+   # 在27017端口(默认端口)启动Mongodb
+   ./mongodb/start.sh
+
+   # 构建hapi服务
+   docker build -t hanhan9449/biubiubiu .
+
+   # 运行hapi服务
+   docker run --rm -d hanhan9449/biubiubiu
+
+   ```
 
 ### Run on Windows
 

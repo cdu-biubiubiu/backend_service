@@ -1,3 +1,4 @@
+# 如果版本出现问题，将版本调低到'3'即可
 version: '3.8'
 services:
   mongodb:
