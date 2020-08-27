@@ -1,0 +1,31 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    # ports:
+    #   - 27017:27017
+    volumes:
+      - ./mongodb/init:/docker-entrypoint-initdb.d
+    networks:
+      - biubiubiu
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=test
+  hapi:
+    image: hanhan9449/biubiubiu
+    networks:
+      - biubiubiu
+    deploy:
+      # replicas: 1
+      # update_config:
+      #   parallelism: 2
+      #   delay: 10s
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - mongodb
+    ports:
+      - 3000:3000
+networks:
+  biubiubiu:

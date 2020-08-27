@@ -17,7 +17,19 @@ const profile: mongoose.ConnectionOptions = {
 };
 
 const init = async () => {
-  await mongoose.connect(uri, profile);
+  try {
+    const db = mongoose.connection;
+    db.on('open', () => {
+      console.log('连接Mongodb成功');
+    });
+    db.once('error', () => {
+      console.error('连接Mongodb失败');
+    });
+    await mongoose.connect(uri, profile);
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 };
 // eslint-disable-next-line import/prefer-default-export
 export { init };
