@@ -47,12 +47,7 @@ const init = async () => {
   mission.push(mongooseService.init());
   await Promise.all(mission);
 
-  // await server.register(plugins);
-
   server.route(endpoints);
-  // // TODO Promise并行化
-  // await config.init();
-  // await mongooseService.init();
   await server.start();
   console.log('🤩 Server is running on %s.', server.info.uri);
 };
