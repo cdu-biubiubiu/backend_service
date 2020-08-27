@@ -8,7 +8,7 @@ import * as config from './config';
 import endpoints from './routes/index';
 
 const init = async () => {
-  const host = 'localhost';
+  const host = '0.0.0.0';
   const port = 3000;
   const server = Hapi.server({
     host,
