@@ -3,8 +3,8 @@ import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
 import * as HapiSwagger from 'hapi-swagger';
 import * as mongooseService from './mongoose.service';
+import * as config from './config';
 
-// import endpoints from './routes';
 import endpoints from './routes/index';
 
 const init = async () => {
@@ -30,11 +30,19 @@ const init = async () => {
       options: swaggerOptions,
     },
   ];
-  await server.register(plugins);
+
+  const mission: Promise<any>[] = [];
+  mission.push(server.register(plugins));
+  mission.push(config.init());
+  mission.push(mongooseService.init());
+  await Promise.all(mission);
+
+  // await server.register(plugins);
 
   server.route(endpoints);
-  // TODO Promise并行化
-  await mongooseService.init();
+  // // TODO Promise并行化
+  // await config.init();
+  // await mongooseService.init();
   await server.start();
   console.log('🤩 Server is running on %s.', server.info.uri);
 };
