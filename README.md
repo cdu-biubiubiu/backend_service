@@ -4,17 +4,19 @@
 
 所使用技术：
 
+- 使用 typescript 作为编码语言
 - 使用 Hapi.js 提供 Web 服务
+- 使用 mongoose 和@typegoose/typegoose 提供 ODM 服务
 - 使用 Mongodb 提供数据存储服务
+- 使用 swagger 提供接口信息
 - 使用 editorconfig，prettier，eslint 的 airbub 配置规范代码；
+- 使用 docker, docker-compose 提供容器化服务
 
 ## Get Start
 
-### Run With Docker
+### Run With Docker // TODO
 
 最简单的方式是直接通过 Docker 运行
-
-<!-- TODO -->
 
 ### Run on Windows
 
@@ -32,7 +34,7 @@
   ```
 
 - [Mongodb](https://www.mongodb.com/try/download/community)
-- [Vscode(用别的也可以)](https://code.visualstudio.com/)
+- [Vscode(推荐)](https://code.visualstudio.com/)
 - 如果使用 Vscode，需要安装以下插件：
   - EditorConfig for VS Code
   - Prettier - Code formatter
@@ -44,7 +46,7 @@
 
 <!-- TODO: 使用ps1脚本一键导入 -->
 
-```powershell
+```sh
 mongo localhost:27017/test ./mongodb/init/articles.js
 ```
 
@@ -64,6 +66,9 @@ yarn --prod
 
 ```sh
 yarn start
+
+# 检测文件变化
+yarn dev
 ```
 
 ## 附录
@@ -78,15 +83,31 @@ yarn start
 
 如果使用 nvm 安装的 Node.js，使用`npm i -g yarn`安装 yarn
 
+1. windows
+
+   以管理员身份打开 powershell，使用`npm i -g yarn`安装
+
+2. windows with nvm
+
+   打开 powershell，使用`npm i -g yarn` 安装
+
+3. linux
+
+   打开终端，使用`sudo npm i -g yarn`安装
+
+4. linux with nvm
+
+   打开终端，使用`npm i -g yarn`安装
+
 ### 换源
 
 ```sh
-# yarn
+# yarn换源
 yarn config set registry https://registry.npm.taobao.org/
 
 # npm
 # 在本地用户目录下新建一个`.npmrc`文件，里面添加
-registry=https://mirrors.sjtug.sjtu.edu.cn/npm-registry
+registry=https://registry.npm.taobao.org/
 
 ```
 
