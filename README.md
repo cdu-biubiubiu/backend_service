@@ -12,11 +12,29 @@
 - 使用 editorconfig，prettier，eslint 的 airbub 配置规范代码；
 - 使用 docker, docker-compose 提供容器化服务
 
+## 预览
+
+Swagger 页面 -- http://localhost:3000/documentation
+
+<!-- TODO: 添加动态图片 -->
+
+![swagger01.png](./image/swagger01.png)
+![swagger02.png](./image/swagger02.png)
+![swagger03.png](./image/swagger03.png)
+
+## 如何使用
+
+这是一个提供 API 的服务器，`/documentation` 为 swagger 文档地址
+
+，`/api` 为各种 api 的地址//todo
+
 ## Get Start
 
-### Run With Docker // TODO
+### Run With Docker
 
 最简单的方式是直接通过 Docker 运行
+
+首先运行之前你需要安装 docker，docker-compose，然后运行 `docker-compose up -d` 即可
 
 ### Run on Windows
 
