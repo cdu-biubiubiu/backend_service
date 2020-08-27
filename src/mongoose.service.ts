@@ -1,15 +1,26 @@
-// import { Mongoose, mongo, Document } from 'mongoose';
 import { mongoose } from '@typegoose/typegoose';
-// import { LinkModel } from './Models/link.model';
-// import { Mongoose } from 'mongoose';
+import { mongo } from 'mongoose';
 
-const uri = 'mongodb://root:password@localhost:27017';
+// const uri = 'mongodb://root:password@localhost/';
+const uri = 'mongodb://root:password@mongodb:27017/';
 const profile: mongoose.ConnectionOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
 const init = async () => {
-  await mongoose.connect(uri, profile);
+  try {
+    const db = mongoose.connection;
+    db.on('open', () => {
+      console.log('连接Mongodb成功');
+    });
+    db.once('error', () => {
+      console.error('连接Mongodb失败');
+    });
+    await mongoose.connect(uri, profile);
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 };
 export { init };
