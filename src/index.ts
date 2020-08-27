@@ -20,6 +20,7 @@ const init = async () => {
     },
   });
 
+  // TODO: 在转发路径无法使用
   const swaggerOptions = {
     info: {
       title: 'Test API Documentation',
@@ -39,6 +40,7 @@ const init = async () => {
     },
   ];
 
+  // TODO: 任务模块化
   const mission: Promise<any>[] = [];
   mission.push(server.register(plugins));
   mission.push(config.init());
