@@ -23,7 +23,7 @@ const linkRoutes: ServerRoute[] = [
   {
     method: 'POST',
     path: '/link',
-    handler: async (req, h) => {
+    handler: async (req) => {
       console.log(`req.payload: ${req.payload}`);
       try {
         const result = await LinkModel.insertMany(req.payload as Link[]);
@@ -43,9 +43,10 @@ const linkRoutes: ServerRoute[] = [
   {
     method: 'DELETE',
     path: '/link/{id}',
-    handler: async (req, h) => {
+    handler: async (req) => {
       console.log(`req.params.id: ${req.params.id}`);
       try {
+        // eslint-disable-next-line no-underscore-dangle
         const _id = mongoose.Types.ObjectId(req.params.id);
         const result = await LinkModel.deleteOne({ _id }).exec();
         return result;

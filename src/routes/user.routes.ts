@@ -20,7 +20,7 @@ const userRoutes: ServerRoute[] = [
   {
     method: 'POST',
     path: '/user',
-    handler: async (req, h) => {
+    handler: async (req) => {
       const result = await UserModel.insertMany(req.payload as User[]);
       return result;
     },
@@ -35,7 +35,8 @@ const userRoutes: ServerRoute[] = [
   {
     method: 'PUT',
     path: '/user/{id}',
-    handler: async (req, h) => {
+    handler: async (req) => {
+      // eslint-disable-next-line no-underscore-dangle
       const _id = mongoose.Types.ObjectId(req.params.id);
       const user = req.payload as User;
       const result = await UserModel.findByIdAndUpdate({ _id }, { $set: user });
@@ -55,7 +56,8 @@ const userRoutes: ServerRoute[] = [
   {
     method: 'DELETE',
     path: '/user/{id}',
-    handler: async (req, h) => {
+    handler: async (req) => {
+      // eslint-disable-next-line no-underscore-dangle
       const _id = mongoose.Types.ObjectId(req.params.id);
       const result = await UserModel.deleteOne({ _id }).exec();
       return result;
