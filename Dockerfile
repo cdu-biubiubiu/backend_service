@@ -1,7 +1,6 @@
-FROM node
+FROM node:alpine as build
 
-
-WORKDIR /hapi
+WORKDIR /build
 
 COPY package.json .
 RUN yarn config set registry https://registry.npm.taobao.org/ &&  yarn install
@@ -9,7 +8,14 @@ RUN yarn config set registry https://registry.npm.taobao.org/ &&  yarn install
 COPY . .
 RUN yarn build
 
+
+FROM node:alpine as prod
+
+WORKDIR /prod
+
+COPY --from=0 /build/dist/ .
+# RUN ls
+
 EXPOSE 3000
 
-CMD MONGO_HOST=mongodb node dist/index.js
-
+CMD MONGO_HOST=mongodb node index.js
