@@ -13,8 +13,9 @@ FROM node:alpine as prod
 
 WORKDIR /prod
 
+COPY --from=0 /build/package.json .
+RUN yarn config set registry https://registry.npm.taobao.org/ &&  yarn install --prod
 COPY --from=0 /build/dist/ .
-# RUN ls
 
 EXPOSE 3000
 
