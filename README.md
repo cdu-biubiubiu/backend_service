@@ -24,7 +24,7 @@ Swagger 页面 -- http://localhost:3000/documentation
 
 ## 如何使用
 
-这是一个提供 API 的服务器，`/documentation` 为 swagger 文档地址, 具体的 api 地址可以在文档页查看
+这是一个提供 API 的服务器，`/documentation` 为 swagger 文档地址, 默认端口为 3000, 具体的 api 地址可以在文档页查看
 
 ## Get Start
 
@@ -34,104 +34,39 @@ Swagger 页面 -- http://localhost:3000/documentation
 
    安装 docker，docker-compose，然后运行 `docker-compose up -d` 即可
 
-2. 手动构建 docker 镜像
-
-   mangodb 的 docker 版运行命令在 `./mongodb/start.sh` 里面，hapi 服务的构建命令在 `Dockerfile` 内。
-
-   linux 示例
-
-   ```sh
-   # 在27017端口(默认端口)启动Mongodb
-   ./mongodb/start.sh
-
-   # 构建hapi服务
-   docker build -t hanhan9449/biubiubiu .
-
-   # 运行hapi服务
-   docker run --rm -d hanhan9449/biubiubiu
-
-   ```
-
 ### Run on Windows
-
-#### 准备工作
 
 要想直接在 windows 上运行，你需要先安装以下包：
 
-- [Node.js](http://nodejs.cn/download/)
+- Node.js
 - yarn
-
-  ```sh
-  # 如果是 linux 环境安装失败可以在前面加一个 sudo
-  # 如果是 windows 环境安装失败则使用 管理员身份打开powershell 打开
-  npm i -g yarn
-  ```
-
-- [Mongodb](https://www.mongodb.com/try/download/community)
-- [Vscode(推荐)](https://code.visualstudio.com/)
-- 如果使用 Vscode，需要安装以下插件：
+- Mongodb
+- Vscode
+- 如果使用 Vscode，安装以下插件获得完整开发体验：
   - EditorConfig for VS Code
   - Prettier - Code formatter
   - Eslint
 
-#### Running
-
-在启动之前，我们需要将 mock 数据导入 Mongodb 中：
-
-<!-- TODO: 使用ps1脚本一键导入 -->
+在启动之前，我们需要将 mock 数据导入 Mongodb 中, 在 mongodb 目录有 init 脚本，以 ps1 结尾的为 windows 脚本，sh 结尾的为 linux 脚本。
 
 ```sh
-mongo localhost:27017/test ./mongodb/init/articles.js
+mongodb
+├── Dockerfile
+├── init
+├── init.ps1
+├── init.sh
+└── start-docker.sh
 ```
 
-接下来安装所需要的依赖：
+使用 `yarn` 安装依赖
 
-```sh
-# develop
-# 如果你想修改代码，就运行下面这个
-yarn
-
-# product
-# 如果你是想快速启动服务器，运行这个
-yarn --prod
-```
-
-开始运行
-
-```sh
-yarn start
-
-# 检测文件变化
-yarn dev
-```
+使用 `yarn dev` 运行
 
 ## 附录
 
 ### 安装 Nodejs
 
 ### 安装 yarn
-
-如果为 windows 平台，需要以管理员身份打开 powershell，然后使用`npm i -g yarn`安装 yarn；
-
-如果是 linux 分发包，使用`sudo npm i -g yarn`安装 yarn；
-
-如果使用 nvm 安装的 Node.js，使用`npm i -g yarn`安装 yarn
-
-1. windows
-
-   以管理员身份打开 powershell，使用`npm i -g yarn`安装
-
-2. windows with nvm
-
-   打开 powershell，使用`npm i -g yarn` 安装
-
-3. linux
-
-   打开终端，使用`sudo npm i -g yarn`安装
-
-4. linux with nvm
-
-   打开终端，使用`npm i -g yarn`安装
 
 ### 换源
 
@@ -142,7 +77,10 @@ yarn config set registry https://registry.npm.taobao.org/
 # npm
 # 在本地用户目录下新建一个`.npmrc`文件，里面添加
 registry=https://registry.npm.taobao.org/
-
 ```
 
 ### 安装`Mongodb`
+
+## 联系我们
+
+WX: hanhan9449
