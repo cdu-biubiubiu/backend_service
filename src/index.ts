@@ -3,7 +3,7 @@ import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
 import * as mongooseService from './services/mongoose.service';
-import * as config from './services/config';
+import * as config from './services/config.service';
 
 import endpoints from './routes/index';
 
