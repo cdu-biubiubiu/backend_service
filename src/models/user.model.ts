@@ -1,6 +1,6 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 
-type Competence = 'superAdministrator' | 'administrator' | 'articlePublisher';
+export type Competence = 'superAdministrator' | 'administrator' | 'articlePublisher';
 export class User {
   @prop({ type: String })
   public username: string;

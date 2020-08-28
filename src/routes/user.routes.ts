@@ -30,7 +30,7 @@ const userRoutes: ServerRoute[] = [
       description: '新增一个用户',
       tags: [API, USER],
       validate: {
-        payload: UserJoi.id,
+        payload: UserJoi.model,
       },
     },
   },
