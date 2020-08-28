@@ -1,9 +1,9 @@
 import Hapi from '@hapi/hapi';
 import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
-import * as HapiSwagger from 'hapi-swagger';
-import * as mongooseService from './mongoose.service';
-import * as config from './config';
+import HapiSwagger from 'hapi-swagger';
+import * as mongooseService from './services/mongoose.service';
+import * as config from './services/config';
 
 import endpoints from './routes/index';
 
