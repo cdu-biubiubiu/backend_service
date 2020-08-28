@@ -2,8 +2,8 @@ import Hapi from '@hapi/hapi';
 import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
-import * as mongooseService from './services/mongoose.service';
-import * as config from './services/config.service';
+import MongoosePlugin from './services/mongoose.service';
+import DotenvPlugin from './services/config.service';
 
 import endpoints from './routes/index';
 
@@ -38,13 +38,19 @@ const init = async () => {
       plugin: HapiSwagger,
       options: swaggerOptions,
     },
+    {
+      plugin: DotenvPlugin,
+    },
+    {
+      plugin: MongoosePlugin,
+    },
   ];
 
-  // TODO: 任务模块化
+  // // TODO: 任务模块化
   const mission: Promise<any>[] = [];
   mission.push(server.register(plugins));
-  mission.push(config.init());
-  mission.push(mongooseService.init());
+  // mission.push(config.init());
+  // mission.push(mongooseService.init());
   await Promise.all(mission);
 
   server.route(endpoints);
@@ -52,7 +58,11 @@ const init = async () => {
   console.log('🤩 Server is running on %s.', server.info.uri);
 };
 
-init().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+init()
+  // .then(() => {
+  //   console.log(process.env);
+  // })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

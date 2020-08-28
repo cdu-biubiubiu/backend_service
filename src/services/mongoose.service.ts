@@ -1,4 +1,5 @@
 import { mongoose } from '@typegoose/typegoose';
+import { Plugin } from '@hapi/hapi';
 
 interface userProfileInterface {
   host: string;
@@ -46,4 +47,14 @@ const init = async () => {
   }
 };
 // eslint-disable-next-line import/prefer-default-export
-export { init };
+// export { init };
+
+const MongoosePlugin: Plugin<any> = {
+  name: 'mongoose',
+  version: '0.0.1',
+  register: init,
+};
+
+// export { plugin };
+
+export default MongoosePlugin;
