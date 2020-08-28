@@ -8,10 +8,10 @@ import DotenvPlugin from './plugins/config.plugin';
 import endpoints from './routes/index';
 
 const init = async () => {
-  /**
-   * host 设置为0.0.0.0 意味着接受任何访问请求，120.0.0.1为只接受本机访问请求
-   */
   const server = Hapi.server({
+    /**
+     * host 设置为0.0.0.0 意味着接受任何访问请求，120.0.0.1为只接受本机访问请求
+     */
     host: '0.0.0.0',
     port: 3000,
     routes: {
