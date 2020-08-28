@@ -25,4 +25,4 @@ COPY --from=0 /build/dist/ .
 
 EXPOSE 3000
 
-CMD MONGO_HOST=mongodb node index.js
+CMD MONGO_HOST=mongodb MONGO_USER='' MONGO_PASSWORD='' node index.js
