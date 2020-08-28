@@ -1,8 +1,9 @@
 import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
-import { LinkModel, Link, JoiLink, JoiLinkId } from '../models/link.model';
+import { LinkModel, Link } from '../models/link.model';
 import { API, LINK } from '../constants';
+import LinkJoi from '../jois/link.joi';
 
 const linkRoutes: ServerRoute[] = [
   {
@@ -30,7 +31,7 @@ const linkRoutes: ServerRoute[] = [
       description: '新增一个友情链接',
       tags: [API, LINK],
       validate: {
-        payload: JoiLink,
+        payload: LinkJoi.model,
       },
     },
   },
@@ -50,7 +51,7 @@ const linkRoutes: ServerRoute[] = [
       tags: [API, LINK],
       validate: {
         params: Joi.object({
-          id: JoiLinkId,
+          id: LinkJoi.id,
         }),
       },
     },

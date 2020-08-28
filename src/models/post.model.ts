@@ -1,5 +1,4 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
-import Joi from 'joi';
 
 export class Post {
   @prop({ type: String })
@@ -23,12 +22,3 @@ export class Post {
 }
 
 export const PostModel = getModelForClass(Post);
-export const JoiPostId = Joi.required().description('文章_id');
-export const JoiPostCreate = Joi.object({
-  title: Joi.string().required().description('文章名'),
-  content: Joi.string().required().description('文章内容'),
-});
-export const JoiPostModify = Joi.object({
-  title: Joi.string().description('文章名'),
-  content: Joi.string().description('文章内容'),
-});

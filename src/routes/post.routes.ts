@@ -1,8 +1,10 @@
 import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
-import { PostModel, Post, JoiPostId, JoiPostCreate, JoiPostModify } from '../models/post.model';
+import { PostModel, Post } from '../models/post.model';
 import { API, POST } from '../constants';
+
+import PostJoi from '../jois/post.joi';
 
 const postRoutes: ServerRoute[] = [
   {
@@ -31,7 +33,7 @@ const postRoutes: ServerRoute[] = [
       tags: [API, POST],
       validate: {
         params: Joi.object({
-          id: JoiPostId,
+          id: PostJoi.id,
         }),
       },
     },
@@ -47,7 +49,7 @@ const postRoutes: ServerRoute[] = [
       description: '发布一篇文章',
       tags: [API, POST],
       validate: {
-        payload: JoiPostCreate,
+        payload: PostJoi.createModel,
       },
     },
   },
@@ -67,9 +69,9 @@ const postRoutes: ServerRoute[] = [
       tags: [API, POST],
       validate: {
         params: Joi.object({
-          id: JoiPostId,
+          id: PostJoi.id,
         }),
-        payload: JoiPostModify,
+        payload: PostJoi.modifyModel,
       },
     },
   },
@@ -87,7 +89,7 @@ const postRoutes: ServerRoute[] = [
       tags: [API, POST],
       validate: {
         params: Joi.object({
-          id: JoiPostId,
+          id: PostJoi.id,
         }),
       },
     },

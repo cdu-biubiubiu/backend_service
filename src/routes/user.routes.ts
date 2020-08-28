@@ -2,7 +2,8 @@ import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
 
-import { UserModel, User, JoiUserId, JoiUser } from '../models/user.model';
+import UserJoi from '../jois/user.joi';
+import { UserModel, User } from '../models/user.model';
 import { API, USER } from '../constants';
 
 const userRoutes: ServerRoute[] = [
@@ -29,7 +30,7 @@ const userRoutes: ServerRoute[] = [
       description: '新增一个用户',
       tags: [API, USER],
       validate: {
-        payload: JoiUser,
+        payload: UserJoi.id,
       },
     },
   },
@@ -48,9 +49,9 @@ const userRoutes: ServerRoute[] = [
       tags: [API, USER],
       validate: {
         params: Joi.object({
-          id: JoiUserId,
+          id: UserJoi.id,
         }),
-        payload: JoiUser,
+        payload: UserJoi.model,
       },
     },
   },
@@ -68,7 +69,7 @@ const userRoutes: ServerRoute[] = [
       tags: [API, USER],
       validate: {
         params: Joi.object({
-          id: JoiUserId,
+          id: UserJoi.id,
         }),
       },
     },
