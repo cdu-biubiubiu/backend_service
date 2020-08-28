@@ -2,7 +2,7 @@ import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
 
-import { UserModel, User, JoiUserArray, JoiUserId, JoiUser } from '../models/user.model';
+import { UserModel, User, JoiUserId, JoiUser } from '../models/user.model';
 
 const userRoutes: ServerRoute[] = [
   {
@@ -25,10 +25,10 @@ const userRoutes: ServerRoute[] = [
       return result;
     },
     options: {
-      description: '新增多个用户',
+      description: '新增一个用户',
       tags: ['api', 'user'],
       validate: {
-        payload: JoiUserArray,
+        payload: JoiUser,
       },
     },
   },

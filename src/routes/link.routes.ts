@@ -1,7 +1,7 @@
 import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
-import { LinkModel, Link, JoiLinkArray, JoiLinkId } from '../models/link.model';
+import { LinkModel, Link, JoiLink, JoiLinkId } from '../models/link.model';
 
 const linkRoutes: ServerRoute[] = [
   {
@@ -9,12 +9,8 @@ const linkRoutes: ServerRoute[] = [
     path: '/link',
     options: {
       handler: async () => {
-        try {
-          const links = await LinkModel.find({}).exec();
-          return links;
-        } catch (e) {
-          return console.error(e);
-        }
+        const links = await LinkModel.find({}).exec();
+        return links;
       },
       description: '获得所有友情链接',
       tags: ['api'],
@@ -25,18 +21,15 @@ const linkRoutes: ServerRoute[] = [
     path: '/link',
     handler: async (req) => {
       console.log(`req.payload: ${req.payload}`);
-      try {
-        const result = await LinkModel.insertMany(req.payload as Link[]);
-        return result;
-      } catch (e) {
-        return console.error(e);
-      }
+
+      const result = await LinkModel.insertMany(req.payload as Link[]);
+      return result;
     },
     options: {
-      description: '新增友情链接(一个或者多个)',
+      description: '新增一个友情链接',
       tags: ['api', 'link'],
       validate: {
-        payload: JoiLinkArray,
+        payload: JoiLink,
       },
     },
   },
@@ -45,14 +38,11 @@ const linkRoutes: ServerRoute[] = [
     path: '/link/{id}',
     handler: async (req) => {
       console.log(`req.params.id: ${req.params.id}`);
-      try {
-        // eslint-disable-next-line no-underscore-dangle
-        const _id = mongoose.Types.ObjectId(req.params.id);
-        const result = await LinkModel.deleteOne({ _id }).exec();
-        return result;
-      } catch (e) {
-        return console.error(e);
-      }
+
+      // eslint-disable-next-line no-underscore-dangle
+      const _id = mongoose.Types.ObjectId(req.params.id);
+      const result = await LinkModel.deleteOne({ _id }).exec();
+      return result;
     },
     options: {
       description: '通过id删除一个链接',

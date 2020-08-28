@@ -4,7 +4,7 @@ import { ServerRoute } from '@hapi/hapi';
 const helloRoutes: ServerRoute[] = [
   {
     method: ['GET'],
-    path: '/hello/{name}/',
+    path: '/hello/{name}',
     options: {
       handler: (req) => `Hello, ${req.params.name}`,
       description: 'Say hello',

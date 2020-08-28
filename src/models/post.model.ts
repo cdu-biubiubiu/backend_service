@@ -27,14 +27,8 @@ export const JoiPostId = Joi.required().description('文章_id');
 export const JoiPostCreate = Joi.object({
   title: Joi.string().required().description('文章名'),
   content: Joi.string().required().description('文章内容'),
-  creationDate: Joi.date().default(new Date()).description('创建时间（默认当前时间）'),
-  // modifiedDate: Joi.date().default(new Date()).description('修改时间（默认为当前时间）'),
 });
 export const JoiPostModify = Joi.object({
-  title: Joi.string().required().description('文章名'),
-  content: Joi.string().required().description('文章内容'),
-  // creationDate: Joi.date().default(new Date()).description('创建时间（默认当前时间）'),
-  modifiedDate: Joi.date().default(new Date()).description('修改时间（默认为当前时间）'),
+  title: Joi.string().description('文章名'),
+  content: Joi.string().description('文章内容'),
 });
-
-// export { PostModel, Post };

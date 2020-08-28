@@ -57,6 +57,7 @@ const postRoutes: ServerRoute[] = [
       // eslint-disable-next-line no-underscore-dangle
       const _id = mongoose.Types.ObjectId(req.params.id);
       const post = req.payload as Post;
+      // TODO: 修改后返回的是修改前的文章
       const result = await PostModel.findByIdAndUpdate({ _id }, { $set: post });
       return result;
     },
