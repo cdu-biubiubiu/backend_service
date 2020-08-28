@@ -8,7 +8,7 @@ namespace PostJoi {
     title,
     content,
     creationDate: Joi.date().forbidden().default(Date.now),
-  });
+  }).label('文章');
   export const modifyModel = Joi.object({
     title,
     content,

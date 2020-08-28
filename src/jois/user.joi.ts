@@ -8,7 +8,7 @@ namespace UserJoi {
   const competence = Joi.string()
     .allow(...Competence)
     .description('权限设置');
-  export const model = Joi.object({ username, password, competence });
+  export const model = Joi.object({ username, password, competence }).label('用户');
   export const modelArray = Joi.array().items(model);
 }
 export = UserJoi;
