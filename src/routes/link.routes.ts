@@ -2,6 +2,7 @@ import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
 import { LinkModel, Link, JoiLink, JoiLinkId } from '../models/link.model';
+import { API, LINK } from '../constants';
 
 const linkRoutes: ServerRoute[] = [
   {
@@ -13,7 +14,7 @@ const linkRoutes: ServerRoute[] = [
         return links;
       },
       description: '获得所有友情链接',
-      tags: ['api'],
+      tags: [API, LINK],
     },
   },
   {
@@ -27,7 +28,7 @@ const linkRoutes: ServerRoute[] = [
     },
     options: {
       description: '新增一个友情链接',
-      tags: ['api', 'link'],
+      tags: [API, LINK],
       validate: {
         payload: JoiLink,
       },
@@ -46,7 +47,7 @@ const linkRoutes: ServerRoute[] = [
     },
     options: {
       description: '通过id删除一个链接',
-      tags: ['api', 'link'],
+      tags: [API, LINK],
       validate: {
         params: Joi.object({
           id: JoiLinkId,

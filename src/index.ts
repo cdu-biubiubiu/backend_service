@@ -2,17 +2,18 @@ import Hapi from '@hapi/hapi';
 import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
-import MongoosePlugin from './services/mongoose.service';
-import DotenvPlugin from './services/config.service';
+import MongoosePlugin from './plugins/mongoose.plugin';
+import DotenvPlugin from './plugins/config.plugin';
 
 import endpoints from './routes/index';
 
 const init = async () => {
-  const host = '0.0.0.0';
-  const port = 3000;
+  /**
+   * host 设置为0.0.0.0 意味着接受任何访问请求，120.0.0.1为只接受本机访问请求
+   */
   const server = Hapi.server({
-    host,
-    port,
+    host: '0.0.0.0',
+    port: 3000,
     routes: {
       cors: {
         origin: ['*'],
@@ -46,23 +47,14 @@ const init = async () => {
     },
   ];
 
-  // // TODO: 任务模块化
-  const mission: Promise<any>[] = [];
-  mission.push(server.register(plugins));
-  // mission.push(config.init());
-  // mission.push(mongooseService.init());
-  await Promise.all(mission);
+  await server.register(plugins);
 
   server.route(endpoints);
   await server.start();
   console.log('🤩 Server is running on %s.', server.info.uri);
 };
 
-init()
-  // .then(() => {
-  //   console.log(process.env);
-  // })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+init().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

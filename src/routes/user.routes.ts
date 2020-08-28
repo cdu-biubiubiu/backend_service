@@ -3,6 +3,7 @@ import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
 
 import { UserModel, User, JoiUserId, JoiUser } from '../models/user.model';
+import { API, USER } from '../constants';
 
 const userRoutes: ServerRoute[] = [
   {
@@ -14,7 +15,7 @@ const userRoutes: ServerRoute[] = [
     },
     options: {
       description: '获得所有用户',
-      tags: ['api', 'user'],
+      tags: [API, USER],
     },
   },
   {
@@ -26,7 +27,7 @@ const userRoutes: ServerRoute[] = [
     },
     options: {
       description: '新增一个用户',
-      tags: ['api', 'user'],
+      tags: [API, USER],
       validate: {
         payload: JoiUser,
       },
@@ -44,7 +45,7 @@ const userRoutes: ServerRoute[] = [
     },
     options: {
       description: '通过_id修改用户信息',
-      tags: ['api', 'user'],
+      tags: [API, USER],
       validate: {
         params: Joi.object({
           id: JoiUserId,
@@ -64,7 +65,7 @@ const userRoutes: ServerRoute[] = [
     },
     options: {
       description: '通过id删除一个用户',
-      tags: ['api', 'user'],
+      tags: [API, USER],
       validate: {
         params: Joi.object({
           id: JoiUserId,

@@ -2,6 +2,7 @@ import { mongoose } from '@typegoose/typegoose';
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
 import { PostModel, Post, JoiPostId, JoiPostCreate, JoiPostModify } from '../models/post.model';
+import { API, POST } from '../constants';
 
 const postRoutes: ServerRoute[] = [
   {
@@ -13,7 +14,7 @@ const postRoutes: ServerRoute[] = [
     },
     options: {
       description: '获得所有文章',
-      tags: ['api', 'post'],
+      tags: [API, POST],
     },
   },
   {
@@ -27,7 +28,7 @@ const postRoutes: ServerRoute[] = [
     },
     options: {
       description: '通过id获得一篇文章',
-      tags: ['api', 'post'],
+      tags: [API, POST],
       validate: {
         params: Joi.object({
           id: JoiPostId,
@@ -44,7 +45,7 @@ const postRoutes: ServerRoute[] = [
     },
     options: {
       description: '发布一篇文章',
-      tags: ['api', 'post'],
+      tags: [API, POST],
       validate: {
         payload: JoiPostCreate,
       },
@@ -63,7 +64,7 @@ const postRoutes: ServerRoute[] = [
     },
     options: {
       description: '通过id修改一篇文章',
-      tags: ['api', 'post'],
+      tags: [API, POST],
       validate: {
         params: Joi.object({
           id: JoiPostId,
@@ -83,7 +84,7 @@ const postRoutes: ServerRoute[] = [
     },
     options: {
       description: '通过id删除一篇文章',
-      tags: ['api', 'post'],
+      tags: [API, POST],
       validate: {
         params: Joi.object({
           id: JoiPostId,

@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
+import { API, HELLO } from '../constants';
 
 const helloRoutes: ServerRoute[] = [
   {
@@ -8,8 +9,7 @@ const helloRoutes: ServerRoute[] = [
     options: {
       handler: (req) => `Hello, ${req.params.name}`,
       description: 'Say hello',
-      notes: "Return 'Hello name' by the name passed in the path",
-      tags: ['api'],
+      tags: [API, HELLO],
       validate: {
         params: Joi.object({
           name: Joi.string().required().description('Your name'),

@@ -18,6 +18,7 @@ function getUri(p: userProfileInterface) {
   }
   return result;
 }
+// TODO: 修改user和password为无密码模式
 const userProfile: userProfileInterface = {
   host: process.env.MONGO_HOST || 'localhost',
   user: process.env.MONGO_USER || 'root',
@@ -26,35 +27,27 @@ const userProfile: userProfileInterface = {
 };
 
 const uri = getUri(userProfile);
-const profile: mongoose.ConnectionOptions = {
+const connectionOptions: mongoose.ConnectionOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
 const init = async () => {
-  try {
-    const db = mongoose.connection;
-    db.on('open', () => {
-      console.log('连接Mongodb成功');
-    });
-    db.once('error', () => {
-      console.error('连接Mongodb失败');
-    });
-    await mongoose.connect(uri, profile);
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
+  const db = mongoose.connection;
+  db.on('open', () => {
+    console.log('连接Mongodb成功');
+  });
+  db.once('error', (err) => {
+    console.error('连接Mongodb失败', err);
+    process.exit(2);
+  });
+  await mongoose.connect(uri, connectionOptions);
 };
-// eslint-disable-next-line import/prefer-default-export
-// export { init };
 
 const MongoosePlugin: Plugin<any> = {
   name: 'mongoose',
   version: '0.0.1',
   register: init,
 };
-
-// export { plugin };
 
 export default MongoosePlugin;
