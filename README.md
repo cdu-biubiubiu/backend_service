@@ -14,13 +14,7 @@
 
 ## 预览
 
-Swagger 页面 -- http://localhost:3000/documentation
-
-<!-- TODO: 添加动态图片 -->
-
-![swagger01.png](./image/swagger01.png)
-![swagger02.png](./image/swagger02.png)
-![swagger03.png](./image/swagger03.png)
+![swagger demo](./image/swagger-demo.gif)
 
 ## 如何使用
 
@@ -32,9 +26,9 @@ Swagger 页面 -- http://localhost:3000/documentation
 
 1. 最简单的方法
 
-   安装 docker，docker-compose，然后运行 `docker-compose up -d` 即可
+   安装 docker，docker-compose，然后运行 `docker-compose up -d` 即可，接下来，你可以直接访问 [swagger 页面](http://localhost:3000/documention)
 
-### Run on Windows
+### Run on localhost
 
 要想直接在 windows 上运行，你需要先安装以下包：
 
@@ -46,6 +40,7 @@ Swagger 页面 -- http://localhost:3000/documentation
   - EditorConfig for VS Code
   - Prettier - Code formatter
   - Eslint
+  - Todo Tree
 
 在启动之前，我们需要将 mock 数据导入 Mongodb 中, 在 mongodb 目录有 init 脚本，以 ps1 结尾的为 windows 脚本，sh 结尾的为 linux 脚本。
 
@@ -79,8 +74,36 @@ yarn config set registry https://registry.npm.taobao.org/
 registry=https://registry.npm.taobao.org/
 ```
 
-### 安装`Mongodb`
+### 安装 Mongodb
+
+## contribution
+
+```sh
+├── image
+│   └── swagger-demo.gif
+├── mongodb
+│   ├── init # mock 数据，生成docker镜像时需要
+│   ├── Dockerfile
+│   ├── init.ps1 # 在本地mongo服务器初始化时使用init脚本
+│   ├── init.sh
+│   └── start-docker.sh
+├── src
+│   ├── models # ODM 模型
+│   ├── routes # 路由
+│   ├── config.ts # 配置服务
+│   ├── index.ts # 入口
+│   └── mongoose.service.ts # 数据库服务
+├── docker-compose.yml
+├── Dockerfile
+├── LICENSE
+├── package.json
+├── README.md
+└── tsconfig.json
+```
 
 ## 联系我们
 
-WX: hanhan9449
+我们是成都大学计算机学院的一群学生，希望为这个项目作贡献的话就来加入我们吧。
+
+- QQ: 1481220484
+- WX: hanhan9449
